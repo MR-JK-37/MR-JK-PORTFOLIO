@@ -1,7 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { isAdminSetup } from '@/lib/auth';
+import { NextResponse } from "next/server"
 
-export async function GET(req: NextRequest) {
-    const isSetup = await isAdminSetup();
-    return NextResponse.json({ isSetup });
+export async function GET() {
+  try {
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({ setup: false })
+    }
+
+    const { prisma } = await import("@/lib/prisma")
+    const setup = await prisma.admin.findFirst()
+
+    return NextResponse.json({ setup: !!setup })
+  } catch (err) {
+    return NextResponse.json({ setup: false })
+  }
 }
