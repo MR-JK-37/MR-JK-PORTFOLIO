@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id            String   @id @default(uuid())
+  username      String   @unique @default("admin")
+  password_hash String
+  created_at    DateTime @default(now())
+}
+
+model Item {
+  id                Int          @id @default(autoincrement())
+  type              String       // 'project', 'achievement', 'participation', 'skill'
+  title             String
+  shortDescription  String
+  fullDescription   String?
+  category          String?      // e.g. 'Web Dev', 'CTF', 'Hackathon'
+  imageUrl          String?      // Quick access to main preview
+  featured          Boolean      @default(false)
+  created_at        DateTime     @default(now())
+  updated_at        DateTime     @updatedAt
+  attachments       Attachment[]
+}
+
+model Attachment {
+  id         Int      @id @default(autoincrement())
+  itemId     Int
+  item       Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  filePath   String
+  fileType   String   // 'image', 'video', 'pdf'
+  isPreview  Boolean  @default(false)
+  created_at DateTime @default(now())
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  content    String
+  read       Boolean  @default(false)
+  created_at DateTime @default(now())
+}

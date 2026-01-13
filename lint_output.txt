@@ -1,0 +1,181 @@
+
+> temp_app@0.1.0 lint
+> eslint
+
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\admin\page.tsx
+  25:13  error  Error: Cannot access variable before it is declared
+
+`fetchStats` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\admin\page.tsx:25:13
+  23 |         // Fetch stats
+  24 |         if (isAdmin) {
+> 25 |             fetchStats();
+     |             ^^^^^^^^^^ `fetchStats` accessed before it is declared
+  26 |         }
+  27 |     }, [isAdmin, isLoading, router]);
+  28 |
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\admin\page.tsx:29:5
+  27 |     }, [isAdmin, isLoading, router]);
+  28 |
+> 29 |     const fetchStats = async () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 30 |         try {
+     | ^^^^^^^^^^^^^
+> 31 |             const [p, a, part] = await Promise.all([
+     …
+     | ^^^^^^^^^^^^^
+> 43 |         }
+     | ^^^^^^^^^^^^^
+> 44 |     };
+     | ^^^^^^^ `fetchStats` is declared here
+  45 |
+  46 |     if (isLoading || !isAdmin) return null;
+  47 |  react-hooks/immutability
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\api\auth\check\route.ts
+  7:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\api\items\[id]\route.ts
+   6:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\api\items\route.ts
+  21:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\api\upload\route.ts
+  6:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\app\resume\page.tsx
+  17:21  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\About.tsx
+  23:26  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  29:31  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  29:49  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\AdminGateway.tsx
+  24:8   warning  React Hook useEffect has a missing dependency: 'checkStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  63:18  warning  'err' is defined but never used                                                                                 @typescript-eslint/no-unused-vars
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Contact.tsx
+  25:34  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\ContactSection.tsx
+  3:10  warning  'motion' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\DetailModal.tsx
+  52:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\ItemModal.tsx
+  250:49  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Navbar.tsx
+  36:21  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\ProjectCard.tsx
+  36:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx
+   60:14  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx:60:14
+  58 |     return (
+  59 |         <>
+> 60 |             <Section
+     |              ^^^^^^^ This component is created during render
+  61 |                 id="projects"
+  62 |                 title="Projects"
+  63 |                 data={projects}
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx:23:21
+  21 |     const participation = items.filter(i => i.category === 'participation');
+  22 |
+> 23 |     const Section = ({ id, title, data, emptyTitle, emptyDescription }: {
+     |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |         id: string;
+     | ^^^^^^^^^^^^^^^^^^^
+> 25 |         title: string;
+     …
+     | ^^^^^^^^^^^^^^^^^^^
+> 55 |         </section>
+     | ^^^^^^^^^^^^^^^^^^^
+> 56 |     );
+     | ^^^^^^ The component is created during render here
+  57 |
+  58 |     return (
+  59 |         <>        react-hooks/static-components
+   68:14  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx:68:14
+  66 |             />
+  67 |
+> 68 |             <Section
+     |              ^^^^^^^ This component is created during render
+  69 |                 id="achievements"
+  70 |                 title="Achievements"
+  71 |                 data={achievements}
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx:23:21
+  21 |     const participation = items.filter(i => i.category === 'participation');
+  22 |
+> 23 |     const Section = ({ id, title, data, emptyTitle, emptyDescription }: {
+     |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |         id: string;
+     | ^^^^^^^^^^^^^^^^^^^
+> 25 |         title: string;
+     …
+     | ^^^^^^^^^^^^^^^^^^^
+> 55 |         </section>
+     | ^^^^^^^^^^^^^^^^^^^
+> 56 |     );
+     | ^^^^^^ The component is created during render here
+  57 |
+  58 |     return (
+  59 |         <>     react-hooks/static-components
+   76:14  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx:76:14
+  74 |             />
+  75 |
+> 76 |             <Section
+     |              ^^^^^^^ This component is created during render
+  77 |                 id="participation"
+  78 |                 title="Participation"
+  79 |                 data={participation}
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\Projects.tsx:23:21
+  21 |     const participation = items.filter(i => i.category === 'participation');
+  22 |
+> 23 |     const Section = ({ id, title, data, emptyTitle, emptyDescription }: {
+     |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |         id: string;
+     | ^^^^^^^^^^^^^^^^^^^
+> 25 |         title: string;
+     …
+     | ^^^^^^^^^^^^^^^^^^^
+> 55 |         </section>
+     | ^^^^^^^^^^^^^^^^^^^
+> 56 |     );
+     | ^^^^^^ The component is created during render here
+  57 |
+  58 |     return (
+  59 |         <>  react-hooks/static-components
+  113:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @next/next/no-img-element
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\components\ResumeSection.tsx
+  3:10  warning  'motion' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\JAIKIRAN\Documents\Appdevelopment\mrjk_portfolio\src\context\AdminContext.tsx
+  44:23  warning  'authenticated' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 24 problems (15 errors, 9 warnings)
+
