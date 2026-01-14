@@ -1,50 +1,21 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
-import { isAuthenticated } from '@/lib/auth';
+import { NextResponse } from "next/server"
+import { prisma } from "../../../../lib/prisma"
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-    if (!isAuthenticated(req)) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+export async function PUT(req: Request, { params }: any) {
+  const body = await req.json()
 
-    try {
-        const { id: idStr } = await params;
-        const id = parseInt(idStr);
-        const data = await req.json();
+  const item = await prisma.item.update({
+    where: { id: Number(params.id) },
+    data: body,
+  })
 
-        const item = await prisma.item.update({
-            where: { id },
-            data: {
-                title: data.title,
-                shortDescription: data.shortDescription,
-                fullDescription: data.fullDescription,
-                category: data.category,
-                imageUrl: data.imageUrl,
-            },
-        });
-
-        return NextResponse.json(item);
-    } catch (error) {
-        console.error('Update Item Error:', error);
-        return NextResponse.json({ error: 'Failed to update item' }, { status: 500 });
-    }
+  return NextResponse.json(item)
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-    if (!isAuthenticated(req)) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+export async function DELETE(_: Request, { params }: any) {
+  await prisma.item.delete({
+    where: { id: Number(params.id) },
+  })
 
-    try {
-        const { id: idStr } = await params;
-        const id = parseInt(idStr);
-        await prisma.item.delete({
-            where: { id },
-        });
-
-        return NextResponse.json({ success: true });
-    } catch (error) {
-        console.error('Delete Item Error:', error);
-        return NextResponse.json({ error: 'Failed to delete item' }, { status: 500 });
-    }
+  return NextResponse.json({ ok: true })
 }

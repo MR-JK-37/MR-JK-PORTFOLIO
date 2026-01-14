@@ -1,27 +1,23 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
-import { verifyKey, setSessionCookie, generateSessionToken } from '@/lib/auth';
+import { NextResponse } from "next/server"
+import { prisma } from "../../../../lib/prisma"
+import bcrypt from "bcryptjs"
 
-export async function POST(req: NextRequest) {
-    try {
-        const { key } = await req.json();
+export async function POST(req: Request) {
+  const body = await req.json()
 
-        const admin = await prisma.admin.findFirst();
-        if (!admin) {
-            return NextResponse.json({ setupRequired: true }, { status: 401 });
-        }
+  const admin = await prisma.admin.findFirst({
+    where: { username: "admin" },
+  })
 
-        const isValid = await verifyKey(key, admin.password_hash);
+  if (!admin) {
+    return NextResponse.json({ error: "Invalid login" }, { status: 401 })
+  }
 
-        if (isValid) {
-            const response = NextResponse.json({ success: true });
-            const token = generateSessionToken();
-            setSessionCookie(response, token);
-            return response;
-        } else {
-            return NextResponse.json({ error: 'ACCESS_DENIED' }, { status: 401 });
-        }
-    } catch (error) {
-        return NextResponse.json({ error: 'Verification failed' }, { status: 500 });
-    }
+  const ok = await bcrypt.compare(body.password, admin.password_hash)
+
+  if (!ok) {
+    return NextResponse.json({ error: "Invalid login" }, { status: 401 })
+  }
+
+  return NextResponse.json({ success: true })
 }
