@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid login" }, { status: 401 })
   }
 
-  const ok = await bcrypt.compare(body.password, admin.password_hash)
+  const ok = await bcrypt.compare(body.secret, admin.password_hash)
 
   if (!ok) {
     return NextResponse.json({ error: "Invalid login" }, { status: 401 })
